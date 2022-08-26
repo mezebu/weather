@@ -13,11 +13,11 @@ export default function Index() {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Box component="main">
-        <Grid container spacing={1}>
-          <Grid item lg={8} md={8} sm={12}>
+        <Grid container spacing={2}>
+          <Grid item lg={8} md={8} sm={12} xs={12}>
             <Overview />
           </Grid>
-          <Grid item lg={4} md={4} sm={12}>
+          <Grid item lg={4} md={4} sm={12} xs={12}>
             <Widgets />
           </Grid>
         </Grid>

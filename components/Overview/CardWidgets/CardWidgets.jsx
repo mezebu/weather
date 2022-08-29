@@ -3,8 +3,6 @@ import { blue, grey } from "@mui/material/colors";
 import React from "react";
 
 const CardWidgets = ({ type }) => {
-  console.log(type);
-
   return (
     <Card
       elevation={0}

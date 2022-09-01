@@ -1,23 +1,17 @@
 import React from "react";
-import {
-  Avatar,
-  Box,
-  Container,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
-import Image from "next/image";
-import ThunderstormOutlinedIcon from "@mui/icons-material/ThunderstormOutlined";
+import { Avatar, Box, Container } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
+import moment from "moment";
+
 import CardWidgets from "./CardWidgets";
 import WbTwilightRoundedIcon from "@mui/icons-material/WbTwilightRounded";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
-import moment from "moment";
+import { FlexSpaceBtw } from "../../styles/globalStyles";
 
-const Widgets = ({ data }) => {
-  // console.log(data);
+const Widgets = ({ data, unit }) => {
+  const unitsTitle = unit === "metric" ? "C" : "F";
 
-  const { id, name, main, sys, weather, timezone, dt } = data;
+  const { id, name, main, sys, weather, timezone } = data;
 
   const widgetDetails = {
     icons: {
@@ -36,7 +30,8 @@ const Widgets = ({ data }) => {
 
   const { icons, title, weatherData } = widgetDetails;
 
-  const dateTime = moment.unix(dt).utc().add(timezone, "s").format("LT");
+  const timezoneInMinutes = timezone / 60;
+  const currentTime = moment().utcOffset(timezoneInMinutes).format("LT");
 
   return (
     <Container>
@@ -51,16 +46,9 @@ const Widgets = ({ data }) => {
                 {sys?.country}
               </Typography>
             </Box>
-            <Typography variant="subtitle2">{dateTime}</Typography>
+            <Typography variant="subtitle2">{currentTime}</Typography>
           </Box>
-          <Box
-            sx={{
-              my: 5,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <FlexSpaceBtw sx={{ my: 5 }}>
             <Box>
               <Avatar
                 alt={weather[0]?.description}
@@ -68,14 +56,17 @@ const Widgets = ({ data }) => {
                 sx={{ width: 65, height: 65 }}
               />
               <Typography variant="h2" sx={{ fontWeight: 700 }}>
-                {Math.round(main?.temp)}&deg;C
+                {Math.round(main?.temp)}&deg;{unitsTitle}
+              </Typography>
+              <Typography component="span" variant="subtitle2">
+                Feels like: {Math.round(main?.feels_like)}&deg;{unitsTitle}
               </Typography>
             </Box>
             <Box>
               <Typography variant="h6">{weather[0]?.main}</Typography>
               <Typography>{weather[0]?.description}</Typography>
             </Box>
-          </Box>
+          </FlexSpaceBtw>
           <Divider />
           <Box sx={{ mt: 2 }}>
             <Typography variant="subtitle2" color="text.secondary" gutterBottom>

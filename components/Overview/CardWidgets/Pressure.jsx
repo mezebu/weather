@@ -6,7 +6,7 @@ import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
 
-const Pressure = ({ value, isLoading }) => {
+const Pressure = ({ value }) => {
   const icon =
     value >= 1013 ? (
       <ArrowDropUpRoundedIcon color="primary" />
@@ -17,6 +17,7 @@ const Pressure = ({ value, isLoading }) => {
   return (
     <Card
       elevation={0}
+      variant="outlined"
       sx={{
         "&:hover": { background: grey[100] },
         backgroundColor: grey[50],
@@ -30,38 +31,22 @@ const Pressure = ({ value, isLoading }) => {
             alignItems: "center",
           }}
         >
-          {isLoading ? (
-            <Skeleton
-              animation="wave"
-              variant="circular"
-              width={40}
-              height={40}
-            />
-          ) : (
-            <CompressRoundedIcon color="primary" fontSize="large" />
-          )}
+          <CompressRoundedIcon color="primary" fontSize="large" />
 
           <Box sx={{ ml: 5 }}>
-            {isLoading ? (
-              <Stack spacing={2}>
-                <Skeleton variant="text" width={90} />
-                <Skeleton variant="text" />
-              </Stack>
-            ) : (
-              <Stack>
-                <Typography color="text.secondary" variant="subtitle2">
-                  Pressure
+            <Stack>
+              <Typography color="text.secondary" variant="subtitle2">
+                Pressure
+              </Typography>
+              <Typography variant="h5" fontWeight={600}>
+                {value}
+                <Typography component="span" fontWeight={500}>
+                  {" "}
+                  mb
                 </Typography>
-                <Typography variant="h5" fontWeight={600}>
-                  {value}
-                  <Typography component="span" fontWeight={500}>
-                    {" "}
-                    mb
-                  </Typography>
-                  {icon}
-                </Typography>
-              </Stack>
-            )}
+                {icon}
+              </Typography>
+            </Stack>
           </Box>
         </Box>
       </CardContent>

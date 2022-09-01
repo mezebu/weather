@@ -7,8 +7,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SearchIcon from "@mui/icons-material/Search";
 import moment from "moment";
 import axios from "axios";
-import { LocationIcon, Search } from "./styles";
+
 import { SearchIconWrapper, StyledInputBase, ThemeIcon } from "./styles";
+import { LocationIcon, Search } from "./styles";
 import WindSpeed from "./CardWidgets/WindSpeed";
 import Pressure from "./CardWidgets/Pressure";
 import MinMaxTemp from "./CardWidgets/MinMaxTemp";

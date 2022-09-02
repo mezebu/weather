@@ -7,6 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SearchIcon from "@mui/icons-material/Search";
 import moment from "moment";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import { SearchIconWrapper, StyledInputBase, ThemeIcon } from "./styles";
 import { LocationIcon, Search } from "./styles";
@@ -22,14 +23,15 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
   const [query, setQuery] = useState("");
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+
   const currentYear = moment().format("MMMM YYYY");
   const currentDate = moment().format("dddd MMM Do YYYY");
 
   const { main, wind } = data;
 
   const tempValues = {
-    minTemp: { title: "Min Temp", value: main?.temp_min },
-    maxTemp: { title: "Max Temp", value: main?.temp_max },
+    minTemp: { title: "Low", value: main?.temp_min },
+    maxTemp: { title: "High", value: main?.temp_max },
   };
   const { minTemp, maxTemp } = tempValues;
 
@@ -78,93 +80,112 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
     });
   }, [lat, lon]);
 
+
+
   return (
-    <Box sx={{ background: "#f2f6f7", height: "100vh" }}>
-      <Container>
-        <Toolbar sx={{ py: 2 }}>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-            <Typography variant="h5" sx={{ fontWeight: 500 }}>
-              {currentYear}
-            </Typography>
-            <Typography variant="subtitle2" color="text.secondary">
-              {currentDate}
-            </Typography>
-          </Box>
-          <Search onSubmit={handleSearch}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search location here"
-              inputProps={{ "aria-label": "search" }}
-              onChange={(e) => setQuery(e.target.value)}
-              value={query}
-            />
-          </Search>
-          <ButtonBase component="div" onClick={fetchCoords}>
-            <LocationIcon>
-              <LocationOnIcon sx={{ fontSize: 20, color: red[400] }} />
-            </LocationIcon>
-          </ButtonBase>
-          <ButtonBase component="div" sx={{ ml: 1, mr:1 }}>
-            <ThemeIcon>
-              <LightModeRoundedIcon sx={{ fontSize: 20 }} />
-            </ThemeIcon>
-          </ButtonBase>
-          <ButtonGroup variant="text" aria-label="text button group">
-            <Button onClick={() => handleUnitChange("metric")}>&deg;C</Button>
-            <Button onClick={() => handleUnitChange("imperial")}>&deg;F</Button>
-          </ButtonGroup>
-        </Toolbar>
-      </Container>
-      <Divider />
-      <Box>
+ 
+      <Box
+        sx={{ borderRight: { md: "1px solid grey" }, height: { md: "100vh" } }}
+      >
         <Container>
-          <Box sx={{ py: 2, px: 2 }}>
-            <Typography variant="button">Today Overview</Typography>
-          </Box>
-          {error ? (
-            <FlexCenter sx={{height: '70vh'}}>
-              <Typography variant="button">{error}</Typography>
-            </FlexCenter>
-          ) : (
-            <>
-              <Grid container spacing={2} sx={{ px: 2 }}>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                  {isLoading ? (
-                    <CardLoader />
-                  ) : (
-                    <WindSpeed value={wind?.speed} />
-                  )}
-                </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                  {isLoading ? (
-                    <CardLoader />
-                  ) : (
-                    <Pressure value={main?.pressure} />
-                  )}
-                </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                  {isLoading ? (
-                    <CardLoader />
-                  ) : (
-                    <MinMaxTemp title={maxTemp.title} value={maxTemp.value} />
-                  )}
-                </Grid>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
-                  {isLoading ? (
-                    <CardLoader />
-                  ) : (
-                    <MinMaxTemp title={minTemp.title} value={minTemp.value} />
-                  )}
-                </Grid>
-              </Grid>
-            </>
-          )}
+          <Toolbar sx={{ py: 2 }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
+              <Typography variant="h5" sx={{ fontWeight: 500 }}>
+                {currentYear}
+              </Typography>
+              <Typography variant="subtitle2" color="text.secondary">
+                {currentDate}
+              </Typography>
+            </Box>
+            <Search onSubmit={handleSearch}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search location here"
+                inputProps={{ "aria-label": "search" }}
+                onChange={(e) => setQuery(e.target.value)}
+                value={query}
+              />
+            </Search>
+            <ButtonBase component="div" onClick={fetchCoords}>
+              <LocationIcon>
+                <LocationOnIcon sx={{ fontSize: 20, color: red[400] }} />
+              </LocationIcon>
+            </ButtonBase>
+            <ButtonBase component="div" sx={{ ml: 1, mr: 1 }}>
+              <ThemeIcon>
+                <LightModeRoundedIcon sx={{ fontSize: 20 }} />
+              </ThemeIcon>
+            </ButtonBase>
+            <ButtonGroup variant="text" aria-label="text button group">
+              <Button onClick={() => handleUnitChange("metric")}>&deg;C</Button>
+              <Button onClick={() => handleUnitChange("imperial")}>
+                &deg;F
+              </Button>
+            </ButtonGroup>
+          </Toolbar>
         </Container>
+        <Divider />
+        <Box>
+          <Container>
+            <Box sx={{ py: 2, px: 2 }}>
+              <Typography variant="button">Today Overview</Typography>
+            </Box>
+            {error ? (
+              <FlexCenter sx={{ height: "70vh" }}>
+                <Typography variant="button">{error}</Typography>
+              </FlexCenter>
+            ) : (
+              <>
+                <Grid container spacing={2} sx={{ px: 2 }}>
+                  <Grid item lg={6} md={6} sm={6} xs={12}>
+                    {isLoading ? (
+                      <CardLoader />
+                    ) : (
+                      <WindSpeed value={wind?.speed} />
+                    )}
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={6} xs={12}>
+                    {isLoading ? (
+                      <CardLoader />
+                    ) : (
+                      <Pressure value={main?.pressure} />
+                    )}
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={6} xs={12}>
+                    {isLoading ? (
+                      <CardLoader />
+                    ) : (
+                      <MinMaxTemp title={maxTemp.title} value={maxTemp.value} />
+                    )}
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={6} xs={12}>
+                    {isLoading ? (
+                      <CardLoader />
+                    ) : (
+                      <MinMaxTemp title={minTemp.title} value={minTemp.value} />
+                    )}
+                  </Grid>
+                </Grid>
+              </>
+            )}
+          </Container>
+        </Box>
       </Box>
-    </Box>
+
   );
 };
 
 export default Overview;
+
+Overview.propType = {
+  data: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool,
+  setData: PropTypes.func.isRequired,
+  setLoading: PropTypes.func,
+  setUnit: PropTypes.func,
+  unit: PropTypes.string,
+  error: PropTypes.bool,
+  setError: PropTypes.func,
+};

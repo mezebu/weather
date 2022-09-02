@@ -5,6 +5,7 @@ import { grey } from "@mui/material/colors";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
+import { OverviewCard } from "../styles";
 
 const Pressure = ({ value }) => {
   const icon =
@@ -15,14 +16,7 @@ const Pressure = ({ value }) => {
     );
 
   return (
-    <Card
-      elevation={0}
-      variant="outlined"
-      sx={{
-        "&:hover": { background: grey[100] },
-        backgroundColor: grey[50],
-      }}
-    >
+    <OverviewCard elevation={0} variant="outlined">
       <CardContent>
         <Box
           sx={{
@@ -50,7 +44,7 @@ const Pressure = ({ value }) => {
           </Box>
         </Box>
       </CardContent>
-    </Card>
+    </OverviewCard>
   );
 };
 

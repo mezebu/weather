@@ -1,4 +1,4 @@
-import { Box, InputBase } from "@mui/material";
+import { Box, InputBase, Card } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 
 const Search = styled("form")(({ theme }) => ({
@@ -68,4 +68,17 @@ const ThemeIcon = styled(Box)(({ theme }) => ({
   justifyContent: "center",
 }));
 
-export { SearchIconWrapper, StyledInputBase, Search, LocationIcon, ThemeIcon };
+const OverviewCard = styled(Card)(({ theme }) => ({
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
+  },
+}));
+
+export {
+  SearchIconWrapper,
+  StyledInputBase,
+  Search,
+  LocationIcon,
+  ThemeIcon,
+  OverviewCard,
+};

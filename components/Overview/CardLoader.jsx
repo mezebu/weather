@@ -2,16 +2,11 @@ import React from "react";
 import { CardContent, Skeleton } from "@mui/material";
 import { Box, Card, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { OverviewCard } from "./styles";
 
 const Loader = () => {
   return (
-    <Card
-      elevation={0}
-      sx={{
-        "&:hover": { background: grey[100] },
-        backgroundColor: grey[50],
-      }}
-    >
+    <OverviewCard elevation={0} variant="outlined">
       <CardContent>
         <Box sx={{ p: 1, display: "flex", alignItems: "center" }}>
           <Skeleton
@@ -29,7 +24,7 @@ const Loader = () => {
           </Box>
         </Box>
       </CardContent>
-    </Card>
+    </OverviewCard>
   );
 };
 

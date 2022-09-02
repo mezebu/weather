@@ -1,9 +1,9 @@
 import React from "react";
-import { CardContent, Skeleton, Typography } from "@mui/material";
-import { Avatar, Box, Card, Stack } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { CardContent, Typography } from "@mui/material";
+import { Avatar, Box, Stack } from "@mui/material";
 import AcUnitRoundedIcon from "@mui/icons-material/AcUnitRounded";
 import DeviceThermostatRoundedIcon from "@mui/icons-material/DeviceThermostatRounded";
+import { OverviewCard } from "../styles";
 
 const MinMaxTemp = ({ value, title }) => {
   const icon =
@@ -13,14 +13,7 @@ const MinMaxTemp = ({ value, title }) => {
       <AcUnitRoundedIcon color="primary" fontSize="large" />
     );
   return (
-    <Card
-      elevation={0}
-      variant="outlined"
-      sx={{
-        "&:hover": { background: grey[100] },
-        backgroundColor: grey[50],
-      }}
-    >
+    <OverviewCard elevation={0} variant="outlined">
       <CardContent>
         <Box
           sx={{
@@ -46,7 +39,7 @@ const MinMaxTemp = ({ value, title }) => {
           </Box>
         </Box>
       </CardContent>
-    </Card>
+    </OverviewCard>
   );
 };
 

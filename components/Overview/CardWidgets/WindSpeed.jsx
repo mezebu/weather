@@ -3,17 +3,11 @@ import { CardContent, Skeleton, Typography } from "@mui/material";
 import { Avatar, Box, Card, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import AirRoundedIcon from "@mui/icons-material/AirRounded";
+import { OverviewCard } from "../styles";
 
 const WindSpeed = ({ value }) => {
   return (
-    <Card
-      elevation={0}
-      variant="outlined"
-      sx={{
-        "&:hover": { background: grey[100] },
-        backgroundColor: grey[50],
-      }}
-    >
+    <OverviewCard elevation={0} variant="outlined">
       <CardContent>
         <Box
           sx={{
@@ -40,7 +34,7 @@ const WindSpeed = ({ value }) => {
           </Box>
         </Box>
       </CardContent>
-    </Card>
+    </OverviewCard>
   );
 };
 

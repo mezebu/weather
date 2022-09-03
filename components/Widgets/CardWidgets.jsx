@@ -1,13 +1,15 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { FlexAlignCenter, FlexSpaceBtw } from "../../styles/globalStyles";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import moment from "moment-timezone";
 
-const CardWidgets = ({ icon, title, weather }) => {
-  const dateTime = moment.unix(weather).format("LT");
+import { FlexAlignCenter, FlexSpaceBtw } from "../../styles/globalStyles";
+
+const CardWidgets = ({ icon, title, weather, timezone }) => {
+  const dateTime = moment
+    .utc(weather, "X")
+    .add(timezone, "seconds")
+    .format("LT");
 
   return (
     <Box>
@@ -37,3 +39,10 @@ const CardWidgets = ({ icon, title, weather }) => {
 };
 
 export default CardWidgets;
+
+CardWidgets.propTypes = {
+  weather: PropTypes.number.isRequired,
+  title: PropTypes.string,
+  icon: PropTypes.object,
+  timezone: PropTypes.number.isRequired,
+};

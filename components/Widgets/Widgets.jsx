@@ -42,7 +42,7 @@ const Widgets = ({ data, unit, error }) => {
       ) : (
         <>
           {id && (
-            <Box sx={{ py: 3 }}>
+            <Box sx={{ py: 3, px: 2 }}>
               <Box
                 sx={{
                   display: "flex",

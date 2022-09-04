@@ -1,12 +1,11 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { useMediaQuery, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
+import PropTypes from "prop-types";
+
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
-import { useMediaQuery } from "@mui/material";
 import ColorModeContext from "../src/ColorModeContext";
 import darkTheme from "../src/darkTheme";
 
@@ -35,12 +34,10 @@ export default function MyApp(props) {
 
   return (
     <CacheProvider value={emotionCache}>
-      {/* <ColorModeContext.Provider value={colorMode}> */}
       <ColorModeContext.Provider
         value={{ darkMode, setDarkMode: _setDarkMode }}
       >
         <ThemeProvider theme={darkMode ? darkTheme : theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>

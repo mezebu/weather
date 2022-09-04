@@ -1,17 +1,20 @@
 import React from "react";
 import { CardContent, Typography } from "@mui/material";
-import { Avatar, Box, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import AcUnitRoundedIcon from "@mui/icons-material/AcUnitRounded";
 import DeviceThermostatRoundedIcon from "@mui/icons-material/DeviceThermostatRounded";
+import PropTypes from "prop-types";
+
 import { OverviewCard } from "../styles";
 
 const MinMaxTemp = ({ value, title }) => {
   const icon =
     value >= 20 ? (
-      <DeviceThermostatRoundedIcon color="primary" fontSize="large" />
+      <DeviceThermostatRoundedIcon fontSize="large" />
     ) : (
-      <AcUnitRoundedIcon color="primary" fontSize="large" />
+      <AcUnitRoundedIcon fontSize="large" />
     );
+
   return (
     <OverviewCard elevation={0} variant="outlined">
       <CardContent>
@@ -44,3 +47,8 @@ const MinMaxTemp = ({ value, title }) => {
 };
 
 export default MinMaxTemp;
+
+MinMaxTemp.propTypes = {
+  value: PropTypes.number,
+  title: PropTypes.string.isRequired,
+};

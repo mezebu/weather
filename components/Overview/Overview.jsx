@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  ButtonBase,
-  ButtonGroup,
-  Container,
-  Tooltip,
-} from "@mui/material";
+import React, { useEffect, useState, useContext } from "react";
 import { Divider, Toolbar, Grid, Typography } from "@mui/material";
+import { Button, ButtonBase, ButtonGroup } from "@mui/material";
+import { Box, Container, Tooltip } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import NightsStayRoundedIcon from "@mui/icons-material/NightsStayRounded";
@@ -16,31 +11,33 @@ import SearchIcon from "@mui/icons-material/Search";
 import PropTypes from "prop-types";
 import moment from "moment";
 import axios from "axios";
-import { useTheme } from "@mui/material/styles";
 
 import { SearchIconWrapper, StyledInputBase, ThemeIcon } from "./styles";
 import { LocationIcon, Search } from "./styles";
+import { FlexCenter } from "../../styles/globalStyles";
 import WindSpeed from "./CardWidgets/WindSpeed";
 import Pressure from "./CardWidgets/Pressure";
 import MinMaxTemp from "./CardWidgets/MinMaxTemp";
 import CardLoader from "./CardLoader";
-import { FlexCenter } from "../../styles/globalStyles";
-import { useContext } from "react";
 import ColorModeContext from "../../src/ColorModeContext";
+import Humidity from "./CardWidgets/Humidity";
+import Visibility from "./CardWidgets/Visibility";
 
 // prettier-ignore
 const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setError, error }) => {
+  
   const [query, setQuery] = useState("");
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
   
-  const { main, wind } = data;
+  const theme = useTheme()
+  const { darkMode, setDarkMode } = useContext(ColorModeContext);
+  const themeTitle = theme.palette.mode.charAt(0).toUpperCase() + theme.palette.mode.slice(1)
+  
+  const { main, wind, visibility } = data;
   const currentYear = moment().format("MMMM YYYY");
   const currentDate = moment().format("dddd MMM Do YYYY");
-  const { darkMode, setDarkMode } = useContext(ColorModeContext);
-  const theme = useTheme()
-  const themeTitle = theme.palette.mode.charAt(0).toUpperCase() +
-              theme.palette.mode.slice(1)
+  
 
 
   const tempValues = {
@@ -147,7 +144,7 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
             </ButtonBase>
           </Tooltip>
 
-          <ButtonGroup variant="text" aria-label="text button group">
+          <ButtonGroup color="inherit" variant="text" aria-label="unit">
             <Button onClick={() => handleUnitChange("metric")}>&deg;C</Button>
             <Button onClick={() => handleUnitChange("imperial")}>&deg;F</Button>
           </ButtonGroup>
@@ -193,6 +190,16 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
                   ) : (
                     <MinMaxTemp title={minTemp.title} value={minTemp.value} />
                   )}
+                </Grid>
+                <Grid item lg={6} md={6} sm={6} xs={12}>
+                  {isLoading ? (
+                    <CardLoader />
+                  ) : (
+                    <Humidity value={main?.humidity} />
+                  )}
+                </Grid>
+                <Grid item lg={6} md={6} sm={6} xs={12}>
+                  {isLoading ? <CardLoader /> : <Visibility value={visibility} />}
                 </Grid>
               </Grid>
             </>

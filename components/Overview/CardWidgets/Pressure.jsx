@@ -5,6 +5,7 @@ import { grey } from "@mui/material/colors";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
+import PropTypes from "prop-types";
 import { OverviewCard } from "../styles";
 
 const Pressure = ({ value }) => {
@@ -25,7 +26,7 @@ const Pressure = ({ value }) => {
             alignItems: "center",
           }}
         >
-          <CompressRoundedIcon color="primary" fontSize="large" />
+          <CompressRoundedIcon fontSize="large" />
 
           <Box sx={{ ml: 5 }}>
             <Stack>
@@ -49,3 +50,7 @@ const Pressure = ({ value }) => {
 };
 
 export default Pressure;
+
+Pressure.propTypes = {
+  value: PropTypes.number,
+};

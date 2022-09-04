@@ -1,8 +1,8 @@
 import React from "react";
-import { CardContent, Skeleton, Typography } from "@mui/material";
-import { Avatar, Box, Card, Stack } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Box, CardContent, Typography, Stack } from "@mui/material";
 import AirRoundedIcon from "@mui/icons-material/AirRounded";
+import PropTypes from "prop-types";
+
 import { OverviewCard } from "../styles";
 
 const WindSpeed = ({ value }) => {
@@ -16,7 +16,7 @@ const WindSpeed = ({ value }) => {
             alignItems: "center",
           }}
         >
-          <AirRoundedIcon color="primary" fontSize="large" />
+          <AirRoundedIcon fontSize="large" />
 
           <Box sx={{ ml: 5 }}>
             <Stack>
@@ -39,3 +39,7 @@ const WindSpeed = ({ value }) => {
 };
 
 export default WindSpeed;
+
+WindSpeed.propTypes = {
+  value: PropTypes.number,
+};

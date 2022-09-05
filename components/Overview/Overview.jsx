@@ -12,8 +12,8 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import axios from "axios";
 
-import { SearchIconWrapper, StyledInputBase, ThemeIcon } from "./styles";
-import { LocationIcon, Search } from "./styles";
+import { SearchIconWrapper, StyledInputBase, ActionIcons } from "./styles";
+import { Search } from "./styles";
 import { FlexCenter } from "../../styles/globalStyles";
 import WindSpeed from "./CardWidgets/WindSpeed";
 import Pressure from "./CardWidgets/Pressure";
@@ -124,9 +124,9 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
             />
           </Search>
           <ButtonBase component="div" onClick={fetchCoords}>
-            <LocationIcon>
+            <ActionIcons>
               <LocationOnIcon sx={{ fontSize: 20, color: red[400] }} />
-            </LocationIcon>
+            </ActionIcons>
           </ButtonBase>
           <Tooltip title={`${themeTitle} mode`}>
             <ButtonBase
@@ -134,13 +134,13 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
               sx={{ ml: 1, mr: 1 }}
               onClick={toggleTheme}
             >
-              <ThemeIcon>
+              <ActionIcons>
                 {theme.palette.mode === "dark" ? (
                   <NightsStayRoundedIcon sx={{ fontSize: 20 }} />
                 ) : (
                   <LightModeRoundedIcon sx={{ fontSize: 20 }} />
                 )}
-              </ThemeIcon>
+              </ActionIcons>
             </ButtonBase>
           </Tooltip>
 
@@ -199,7 +199,11 @@ const Overview = ({ data, isLoading, setData, setLoading, setUnit, unit, setErro
                   )}
                 </Grid>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                  {isLoading ? <CardLoader /> : <Visibility value={visibility} />}
+                  {isLoading ? (
+                    <CardLoader />
+                  ) : (
+                    <Visibility value={visibility} />
+                  )}
                 </Grid>
               </Grid>
             </>

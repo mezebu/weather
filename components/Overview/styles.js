@@ -41,23 +41,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const LocationIcon = styled(Box)(({ theme }) => ({
+const ActionIcons = styled(Box)(({ theme }) => ({
   width: 37,
   height: 38,
-  border: "1px solid rgb(19, 47, 76)",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.1),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
-  },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const ThemeIcon = styled(Box)(({ theme }) => ({
-  width: 37,
-  height: 38,
+  border: "1px solid rgb(19, 47, 70)",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.black, 0.1),
   "&:hover": {
@@ -78,7 +65,6 @@ export {
   SearchIconWrapper,
   StyledInputBase,
   Search,
-  LocationIcon,
-  ThemeIcon,
+  ActionIcons,
   OverviewCard,
 };

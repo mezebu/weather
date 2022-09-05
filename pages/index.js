@@ -42,7 +42,7 @@ export default function Index() {
   return (
     <Box>
       <Head>
-        <title>Henry&apos;s Weather App</title>
+        <title>Weather App</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Box component="main">

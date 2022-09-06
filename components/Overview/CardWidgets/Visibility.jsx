@@ -26,7 +26,7 @@ const Visibility = ({ value }) => {
                 Visibility
               </Typography>
               <Typography variant="h5" fontWeight={600}>
-                {visibility}
+                {Math.round(visibility)}
                 <Typography component="span" fontWeight={500}>
                   {" "}
                   Km

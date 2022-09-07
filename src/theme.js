@@ -18,6 +18,9 @@ const theme = createTheme({
       paper: "#e4e5f1",
     },
   },
+  typography: {
+    fontFamily: "Quicksand",
+  },
 });
 
 export default theme;

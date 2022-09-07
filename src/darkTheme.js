@@ -18,6 +18,9 @@ const darkTheme = createTheme({
       paper: "#332940",
     },
   },
+  typography: {
+    fontFamily: "Quicksand",
+  },
 });
 
 export default darkTheme;
